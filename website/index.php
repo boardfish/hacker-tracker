@@ -59,8 +59,6 @@ session_start();
             <td><input type="number" name="endhour" min="0" max="23" value=""></td>
             <td><input type="number" name="endmin" min="0" max="59" value=""></td>
           </tr>
-          <!--If no datetime solution found, assume that if endtime<starttime the event crosses today and tomorrow.
-          Obviously this means hackathons of more than 2 days can't be entered yet...--->
         </table>
         <p><input type="submit" value="Submit"></p>
         </form>
