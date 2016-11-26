@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,7 +21,7 @@
         <p>
           Have you got a team? Input your GitHub usernames here!
         </p>
-        <form class="" action="index.html" method="post">
+        <form class="" action="results.php" method="post">
           <label for="teammate1">You:</label><input type="text" name="teammate1" value=""><br>
           <label for="teammate2">Teammate 1:</label><input type="text" name="teammate2" value=""><br>
           <label for="teammate3">Teammate 2:</label><input type="text" name="teammate3" value=""><br>
