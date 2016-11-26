@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Hacker Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js" charset="utf-8"></script>
   </head>
   <body>
     <header>
@@ -15,6 +16,32 @@
         <p>
           Welcome to another great MLH hackathon! There are new people to meet, new places to go, and most of all, new levels of tiredness to reach (of course). But we won't let this go forgotten! Use <strong>Hacker Tracker</strong> to document your hackathon, from those awkward planning stages to another intense game of Werewolf, and maybe to the time you'll get your hands on an award.
         </p>
+      </div>
+      <div id="eventProfile" class="hackathonSection"> <!--to be deprecated?
+      Intending to scrape MLH pages for this, but it could be tough.-->
+        <p>
+          Feed in the details of the event here.
+        </p>
+        <form method="post" action="">
+        <table border="1">
+          <tr>
+            <td>Event Name</td>
+            <td><input type="text" value=""></td>
+          </tr>
+          <!--Firefox doesn't support datetime types, need a solution!!-->
+          <tr>
+            <td>Hacking Start Time</td>
+            <td><input type="number" name="starthour" min="0" max="23"><input type="number" name="startminute" min="0" max="59"></td>
+          </tr>
+          <tr>
+            <td>Hacking End Time</td>
+            <td><input type="number" name="endhour" min="0" max="23"><input type="number" name="endminute" min="0" max="59"></td>
+          </tr>
+          <!--If no datetime solution found, assume that if endtime<starttime the event crosses today and tomorrow.
+          Obviously this means hackathons of more than 2 days can't be entered yet...--->
+        </table>
+        <p><input type="submit" value="Submit"></p>
+        </form>
       </div>
       <div id="GitHubProfiles">
         <p>
