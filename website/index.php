@@ -3,7 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>Hacker Tracker</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/jquery-ui/jquery-ui-timepicker-addon.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <script src="jquery-ui/jquery-ui-timepicker-addon.js" charset="utf-8"></script>
+    <script>
+      $( document ).ready(function() {
+        console.log( "ready!" );
+        $( "main div.hackathonSection .datetimepicker" ).datepicker();
+      });
+    </script>
   </head>
   <body>
     <header>
@@ -17,8 +27,9 @@
           Welcome to another great MLH hackathon! There are new people to meet, new places to go, and most of all, new levels of tiredness to reach (of course). But we won't let this go forgotten! Use <strong>Hacker Tracker</strong> to document your hackathon, from those awkward planning stages to another intense game of Werewolf, and maybe to the time you'll get your hands on an award.
         </p>
       </div>
-      <div id="eventProfile" class="hackathonSection"> <!--to be deprecated?
+      <div id="eventProfile" class="hackathonSection"> <!--Most of this to be deprecated?
       Intending to scrape MLH pages for this, but it could be tough.-->
+        <h1>The Event</h1>
         <p>
           Feed in the details of the event here.
         </p>
@@ -26,16 +37,20 @@
         <table border="1">
           <tr>
             <td>Event Name</td>
-            <td><input type="text" value=""></td>
+            <td colspan="3"><input type="text" value="" size="70"></td>
           </tr>
           <!--Firefox doesn't support datetime types, need a solution!!-->
           <tr>
             <td>Hacking Start Time</td>
-            <td><input type="number" name="starthour" min="0" max="23"><input type="number" name="startminute" min="0" max="59"></td>
+            <td><input class="datetimepicker" type="text" name="startdate"></td>
+            <td><input type="number" name="starthour" min="0" max="23" value=""></td>
+            <td><input type="number" name="startmin" min="0" max="59" value=""></td>
           </tr>
           <tr>
             <td>Hacking End Time</td>
-            <td><input type="number" name="endhour" min="0" max="23"><input type="number" name="endminute" min="0" max="59"></td>
+            <td><input class="datetimepicker" type="text" name="enddate"></td>
+            <td><input type="number" name="endhour" min="0" max="23" value=""></td>
+            <td><input type="number" name="endmin" min="0" max="59" value=""></td>
           </tr>
           <!--If no datetime solution found, assume that if endtime<starttime the event crosses today and tomorrow.
           Obviously this means hackathons of more than 2 days can't be entered yet...--->
@@ -44,6 +59,7 @@
         </form>
       </div>
       <div id="GitHubProfiles">
+        <h1>Your Team</h1>
         <p>
           Have you got a team? Input your usernames here!
         </p>
