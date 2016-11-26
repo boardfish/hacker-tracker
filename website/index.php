@@ -1,3 +1,9 @@
+<?php
+ini_set('display_errors', '0');
+require_once __DIR__ . "/vendor/autoload.php";
+require_once "results.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -127,6 +133,7 @@
       </ul>
     </nav>
     <main>
+      <?php validateForm(); ?>
       <div id="InitialContent">
         <h1>Welcome.</h1>
         <p>
@@ -171,6 +178,22 @@
           Have you got a team? Input your usernames here!
         </p>
         <form class="forms" method="post" action="">
+        <?php
+        if ($_SESSION['errors']):
+        ?>
+        <h3>The following fields contain invalid values:</h3>
+        <ul>
+        <?php
+          foreach($_SESSION['errors'] as $name => $value) {
+            $field_info = getFieldInfoFromName($name);
+            $msg = "Team Member {$field_info[1]}'s " . $field_info[2] . (($field_info[2] == "name")? "" : "name");
+            echo "<li>$msg</li>";
+          }
+        ?>
+        </ul>
+        <?php
+        endif;
+        ?>
         <table border="1">
           <tr>
             <td> </td>
@@ -180,25 +203,25 @@
           </tr>
           <tr>
             <td>Team Member 1</td>
-            <td><input type="text" name="teammate1" value=""><br></td>
+            <td><input type="text" name="teammate1name" value=""><br></td>
             <td><input type="text" name="teammate1github" value=""><br></td>
             <td><input type="text" name="teammate1twitter" value=""><br></td>
           </tr>
           <tr>
             <td>Team Member 2</td>
-            <td><input type="text" name="teammate2" value=""><br></td>
+            <td><input type="text" name="teammate2name" value=""><br></td>
             <td><input type="text" name="teammate2github" value=""><br></td>
             <td><input type="text" name="teammate2twitter" value=""><br></td>
           </tr>
           <tr>
             <td>Team Member 3</td>
-            <td><input type="text" name="teammate3" value=""><br></td>
+            <td><input type="text" name="teammate3name" value=""><br></td>
             <td><input type="text" name="teammate3github" value=""><br></td>
             <td><input type="text" name="teammate3twitter" value=""><br></td>
           </tr>
           <tr>
             <td>Team Member 4</td>
-            <td><input type="text" name="teammate4" value=""><br></td>
+            <td><input type="text" name="teammate4name" value=""><br></td>
             <td><input type="text" name="teammate4github" value=""><br></td>
             <td><input type="text" name="teammate4twitter" value=""><br></td>
           </tr>
