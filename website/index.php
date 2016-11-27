@@ -15,10 +15,108 @@ session_start();
     <script src="jquery-ui/jquery-ui.min.js"></script>
     <script src="jquery-ui/jquery-ui-timepicker-addon.js" charset="utf-8"></script>
     <script>
-      $( document ).ready(function() {
-        console.log( "ready!" );
-        $( "main div.hackathonSection .datetimepicker" ).datepicker();
+    $(document).ready(function() {
+      console.log( "ready!" );
+      $( "main div.hackathonSection .datetimepicker" ).datepicker();
+      $('main #event').hide();
+      $select = $('#eventType');
+      $('#annoyance').hide();
+      $('#teamName').show();
+      $('#sleep').hide();
+      $('#wake').hide();
+      $('#alpha').hide();
+      $('#werewolf').hide();
+      var currentTime = new Date().toTimeString();
+      document.getElementById('date').setAttribute('value', currentTime);
+      $("form :input").change(function() {
+        console.log($(this).closest('form').serialize());
       });
+
+      $select.change(function(){
+          if($(this).val() == "annoyance"){
+              if($('#annoyance').is(":hidden")){
+                  $('#annoyance').slideDown();
+              }
+              $('#teamName').hide();
+              $('#sleep').hide();
+              $('#wake').hide();
+              $('#alpha').hide();
+              $('#werewolf').hide();
+          }
+          if($(this).val() == "teamName"){
+              if($('#teamName').is(":hidden")){
+                  $('#teamName').slideDown();
+              }
+              $('#annoyance').hide();
+              $('#sleep').hide();
+              $('#wake').hide();
+              $('#alpha').hide();
+              $('#werewolf').hide();
+          }
+          if($(this).val() == "sleep"){
+              if($('#sleep').is(":hidden")){
+                  $('#sleep').slideDown();
+              }
+              $('#annoyance').hide();
+              $('#teamName').hide();
+              $('#wake').hide();
+              $('#alpha').hide();
+              $('#werewolf').hide();
+          }
+          if($(this).val() == "wake"){
+              if($('#wake').is(":hidden")){
+                  $('#wake').slideDown();
+              }
+              $('#annoyance').hide();
+              $('#sleep').hide();
+              $('#teamName').hide();
+              $('#alpha').hide();
+              $('#werewolf').hide();
+          }
+          if($(this).val() == "alpha"){
+              if($('#alpha').is(":hidden")){
+                  $('#alpha').slideDown();
+              }
+              $('#annoyance').hide();
+              $('#sleep').hide();
+              $('#wake').hide();
+              $('#teamName').hide();
+              $('#werewolf').hide();
+          }
+          if($(this).val() == "werewolf"){
+              if($('#werewolf').is(":hidden")){
+                  $('#werewolf').slideDown();
+              }
+              $('#annoyance').hide();
+              $('#sleep').hide();
+              $('#wake').hide();
+              $('#alpha').hide();
+              $('#teamName').hide();
+          }
+          });
+
+          $('nav ul #TheEvent').click(function () {
+            console.log("showevent executed");
+            $('main #eventProfile').show();
+            $('main #GitHubProfiles').hide();
+            $('main #event').hide();
+            return false;
+          });
+          $('nav ul #YourTeam').click(function () {
+            console.log("showyourteam executed");
+            $('main #eventProfile').hide();
+            $('main #GitHubProfiles').show();
+            $('main #event').hide();
+            return false;
+          });
+          $('nav ul #Milestones').click(function () {
+            console.log("showmilestones executed");
+            $('main #eventProfile').hide();
+            $('main #GitHubProfiles').hide();
+            $('main #event').show();
+            return false;
+          });
+    });
     </script>
   </head>
   <body>
@@ -26,6 +124,13 @@ session_start();
       <h1>Hacker Tracker</h1>
       <h2>Complete documentation for your hackathon!</h2>
     </header>
+    <nav>
+      <ul>
+        <li><a href="#" id="TheEvent">The Event</a></li>
+        <li><a href="#" id="YourTeam">Your Team</a></li>
+        <li><a href="#" id="Milestones">Milestones</a></li>
+      </ul>
+    </nav>
     <main>
       <?php validateForm(); ?>
       <div id="InitialContent">
@@ -118,6 +223,30 @@ session_start();
           </tr>
         </table>
         <p><input type="submit" value="Submit"></p>
+        </form>
+      </div>
+      <div id="event" class="hackathonSection">
+        <h1>Events</h1>
+        <p>
+          Don't let the greatest moments of your hackathon fall under a surge of sleepiness or (Torvalds forbid) an avalanche of alcohol. List any major milestones your group hit here!
+        </p>
+        <select id="eventType" name="eventType">
+          <option value="annoyance">Annoyance Discovered</option>
+          <option value="teamName" selected="selected">Team Name Chosen</option>
+          <option value="sleep">Team Member Sleeps</option>
+          <option value="wake">Team Member Awakens</option>
+          <option value="alpha">Working Alpha Created</option>
+          <option value="werewolf">Werewolf Played</option>
+        </select>
+        <form id="eventContent" class="forms" action="" method="post">
+            <input id="annoyance" name="annoyanceContent" type="text" placeholder="What bug did you find?" size="60"/>
+            <input id="teamName" name="teamNameContent" type="text" placeholder="What have you crowned your team?" size="60"/>
+            <input id="sleep" name="sleepContent" type="text" placeholder="Who's sleeping?" size="60"/>
+            <input id="wake" name="wakeContent" type="text" placeholder="Who has awakened?" size="60"/>
+            <input id="alpha" name="alphaContent" type="text" placeholder="What's the commit ID of your alpha?" size="60"/>
+            <input id="werewolf" name="werewolfContent" type="text" placeholder="Who's playing Werewolf?" size="60"/>
+            <input id="date" name="date" type="text" style="display:none;"> <!--might not work?...-->
+            <input type="submit" value="Submit">
         </form>
       </div>
     </main>
