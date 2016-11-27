@@ -27,7 +27,7 @@
       </div>
       <div class="well">
         <p>
-          We hope you had a great time at Hackathon, on behalf of MLH and all of the sponsors!
+          We hope you had a great time at <?=$hack_event['event_name']?>, on behalf of MLH and all of the sponsors!
           Be sure to attend more hackathons and get that point score up!
         </p>
       </div>
