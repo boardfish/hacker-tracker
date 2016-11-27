@@ -1,4 +1,6 @@
 function getTimeRemaining(endtime) {
+
+  var endtime = document.getElementById("user_input").value
   var t = Date.parse(endtime) - Date.parse(new Date()); /*This bit needs to receive the datetime passed as endtime, and parse.*/
   var minutes = Math.floor((t / 1000 / 60) % 60);
   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
