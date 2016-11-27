@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', '0');
+ini_set('display_errors', '1');
 require_once __DIR__ . "/vendor/autoload.php";
 require_once "results.php";
 session_start();
@@ -11,114 +11,6 @@ session_start();
     <title>Hacker Tracker</title>
     <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui-timepicker-addon.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-    <script src="jquery-ui/jquery-ui.min.js"></script>
-    <script src="jquery-ui/jquery-ui-timepicker-addon.js" charset="utf-8"></script>
-    <script>
-    $(document).ready(function() {
-      console.log( "ready!" );
-      $( "main div.hackathonSection .datetimepicker" ).datepicker();
-      $('main #event').hide();
-      $select = $('#eventType');
-      $('#annoyance').hide();
-      $('#teamName').show();
-      $('#sleep').hide();
-      $('#wake').hide();
-      $('#alpha').hide();
-      $('#werewolf').hide();
-      var currentTime = new Date().toTimeString();
-      document.getElementById('date').setAttribute('value', currentTime);
-      $("form :input").change(function() {
-        console.log($(this).closest('form').serialize());
-      });
-
-      $select.change(function(){
-          if($(this).val() == "annoyance"){
-              if($('#annoyance').is(":hidden")){
-                  $('#annoyance').slideDown();
-              }
-              $('#teamName').hide();
-              $('#sleep').hide();
-              $('#wake').hide();
-              $('#alpha').hide();
-              $('#werewolf').hide();
-          }
-          if($(this).val() == "teamName"){
-              if($('#teamName').is(":hidden")){
-                  $('#teamName').slideDown();
-              }
-              $('#annoyance').hide();
-              $('#sleep').hide();
-              $('#wake').hide();
-              $('#alpha').hide();
-              $('#werewolf').hide();
-          }
-          if($(this).val() == "sleep"){
-              if($('#sleep').is(":hidden")){
-                  $('#sleep').slideDown();
-              }
-              $('#annoyance').hide();
-              $('#teamName').hide();
-              $('#wake').hide();
-              $('#alpha').hide();
-              $('#werewolf').hide();
-          }
-          if($(this).val() == "wake"){
-              if($('#wake').is(":hidden")){
-                  $('#wake').slideDown();
-              }
-              $('#annoyance').hide();
-              $('#sleep').hide();
-              $('#teamName').hide();
-              $('#alpha').hide();
-              $('#werewolf').hide();
-          }
-          if($(this).val() == "alpha"){
-              if($('#alpha').is(":hidden")){
-                  $('#alpha').slideDown();
-              }
-              $('#annoyance').hide();
-              $('#sleep').hide();
-              $('#wake').hide();
-              $('#teamName').hide();
-              $('#werewolf').hide();
-          }
-          if($(this).val() == "werewolf"){
-              if($('#werewolf').is(":hidden")){
-                  $('#werewolf').slideDown();
-              }
-              $('#annoyance').hide();
-              $('#sleep').hide();
-              $('#wake').hide();
-              $('#alpha').hide();
-              $('#teamName').hide();
-          }
-          });
-
-          $('nav ul #TheEvent').click(function () {
-            console.log("showevent executed");
-            $('main #eventProfile').show();
-            $('main #GitHubProfiles').hide();
-            $('main #event').hide();
-            return false;
-          });
-          $('nav ul #YourTeam').click(function () {
-            console.log("showyourteam executed");
-            $('main #eventProfile').hide();
-            $('main #GitHubProfiles').show();
-            $('main #event').hide();
-            return false;
-          });
-          $('nav ul #Milestones').click(function () {
-            console.log("showmilestones executed");
-            $('main #eventProfile').hide();
-            $('main #GitHubProfiles').hide();
-            $('main #event').show();
-            return false;
-          });
-
-    });
-    </script>
   </head>
   <body>
     <header>
@@ -147,13 +39,13 @@ session_start();
         <p>
           Feed in the details of the event here.
         </p>
-        <form class="forms" method="post" action="">
+        <form method="post">
+          <input type="hidden" name="post_key" value="overall_event">
         <table border="1">
           <tr>
             <td>Event Name</td>
-            <td colspan="3"><input type="text" value="" size="70"></td>
+            <td colspan="3"><input type="text" name="event_name" value="" size="70"></td>
           </tr>
-          <!--Firefox doesn't support datetime types, need a solution!!-->
           <tr>
             <td>Hacking Start Time</td>
             <td><input class="datetimepicker" type="text" name="startdate"></td>
@@ -192,6 +84,8 @@ session_start();
         <?php
         endif;
         ?>
+        <form method="post">
+        <input type="hidden" name="post_key" value="people">
         <table border="1">
           <tr>
             <td> </td>
@@ -232,23 +126,24 @@ session_start();
         <p>
           Don't let the greatest moments of your hackathon fall under a surge of sleepiness or (Torvalds forbid) an avalanche of alcohol. List any major milestones your group hit here!
         </p>
-        <select id="eventType" name="eventType">
-          <option value="annoyance">Annoyance Discovered</option>
-          <option value="teamName" selected="selected">Team Name Chosen</option>
-          <option value="sleep">Team Member Sleeps</option>
-          <option value="wake">Team Member Awakens</option>
-          <option value="alpha">Working Alpha Created</option>
-          <option value="werewolf">Werewolf Played</option>
-        </select>
-        <form id="eventContent" class="forms" action="" method="post">
-            <input id="annoyance" name="annoyanceContent" type="text" placeholder="What bug did you find?" size="60"/>
-            <input id="teamName" name="teamNameContent" type="text" placeholder="What have you crowned your team?" size="60"/>
-            <input id="sleep" name="sleepContent" type="text" placeholder="Who's sleeping?" size="60"/>
-            <input id="wake" name="wakeContent" type="text" placeholder="Who has awakened?" size="60"/>
-            <input id="alpha" name="alphaContent" type="text" placeholder="What's the commit ID of your alpha?" size="60"/>
-            <input id="werewolf" name="werewolfContent" type="text" placeholder="Who's playing Werewolf?" size="60"/>
-            <input id="date" name="date" type="text" style="display:none;"> <!--might not work?...-->
-            <input type="submit" value="Submit">
+        <form id="eventContent" class="forms" method="post">
+          <select id="eventType" name="eventType">
+            <option value="annoyance">Annoyance Discovered</option>
+            <option value="teamName" selected="selected">Team Name Chosen</option>
+            <option value="sleep">Team Member Sleeps</option>
+            <option value="wake">Team Member Awakens</option>
+            <option value="alpha">Working Alpha Created</option>
+            <option value="werewolf">Werewolf Played</option>
+          </select>
+          <input type="hidden" name="post_key" value="events">
+          <input id="annoyance" name="annoyanceContent" type="text" placeholder="What bug did you find?" size="60"/>
+          <input id="teamName" name="teamNameContent" type="text" placeholder="What have you crowned your team?" size="60"/>
+          <input id="sleep" name="sleepContent" type="text" placeholder="Who's sleeping?" size="60"/>
+          <input id="wake" name="wakeContent" type="text" placeholder="Who has awakened?" size="60"/>
+          <input id="alpha" name="alphaContent" type="text" placeholder="What's the commit ID of your alpha?" size="60"/>
+          <input id="werewolf" name="werewolfContent" type="text" placeholder="Who's playing Werewolf?" size="60"/>
+          <input id="date" name="date" type="text" style="display:none;"> <!--might not work?...-->
+          <input type="submit" value="Submit">
         </form>
       </div>
     </main>
@@ -257,5 +152,9 @@ session_start();
         By <a href="http://github.com/undying-fish">Simon Fish</a>, <a href="http://github.com/SanzianaCH">Sanziana Chiorescu</a>, <a href="http://github.com/szen95">Tzen Szen</a> and <a href="http://github.com/darrenvong">Darren Vong</a>.
       </p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <script src="jquery-ui/jquery-ui-timepicker-addon.js" charset="utf-8"></script>
+    <script src="functionalities.js"></script>
   </body>
 </html>
