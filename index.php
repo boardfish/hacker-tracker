@@ -82,7 +82,11 @@ session_start();
             <td><input type="number" name="end_hour" min="0" max="23" value=""></td>
             <td><input type="number" name="end_min" min="0" max="59" value=""></td>
           </tr>
-        </table>
+          <tr>
+            <td>Repo (user/repo)</td>
+            <td colspan="3"><input type="text" name="repo_name" value="" size="70"></td>
+</tr>
+        </table>     
         <p><input class="btn orange" type="submit" value="Submit"></p>
         </form>
       </div>
