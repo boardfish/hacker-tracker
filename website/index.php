@@ -9,8 +9,8 @@ session_start();
   <head>
     <meta charset="utf-8">
     <title>Hacker Tracker</title>
-    <link rel="stylesheet" href="/jquery-ui/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="/jquery-ui/jquery-ui-timepicker-addon.css">
+    <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui-timepicker-addon.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="jquery-ui/jquery-ui.min.js"></script>
     <script src="jquery-ui/jquery-ui-timepicker-addon.js" charset="utf-8"></script>
@@ -116,6 +116,7 @@ session_start();
             $('main #event').show();
             return false;
           });
+
     });
     </script>
   </head>
@@ -139,13 +140,14 @@ session_start();
           Welcome to another great MLH hackathon! There are new people to meet, new places to go, and most of all, new levels of tiredness to reach (of course). But we won't let this go forgotten! Use <strong>Hacker Tracker</strong> to document your hackathon, from those awkward planning stages to another intense game of Werewolf, and maybe to the time you'll get your hands on an award.
         </p>
       </div>
-      <div id="eventProfile" class="hackathonSection"> <!--Most of this to be deprecated?
-      Intending to scrape MLH pages for this, but it could be tough.-->
+      <div id="eventProfile" class="hackathonSection">
+        <!--Most of this to be deprecated?
+        Intending to scrape MLH pages for this, but it could be tough.-->
         <h1>The Event</h1>
         <p>
           Feed in the details of the event here.
         </p>
-        <form method="post" action="">
+        <form class="forms" method="post" action="">
         <table border="1">
           <tr>
             <td>Event Name</td>
@@ -168,11 +170,12 @@ session_start();
         <p><input type="submit" value="Submit"></p>
         </form>
       </div>
-      <div id="GitHubProfiles">
+      <div id="GitHubProfiles" class="hackathonSection">
         <h1>Your Team</h1>
         <p>
           Have you got a team? Input your usernames here!
         </p>
+        <form class="forms" method="post" action="">
         <?php
         if ($_SESSION['errors']):
         ?>
@@ -189,7 +192,6 @@ session_start();
         <?php
         endif;
         ?>
-        <form method="post">
         <table border="1">
           <tr>
             <td> </td>
