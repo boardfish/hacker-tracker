@@ -15,6 +15,7 @@ function validateForm() {
       else {
         $filtered_value = htmlspecialchars(strip_tags($_POST[$_POST["eventType"]."Content"]));
         $_SESSION['valid']["event_value"] = $filtered_value;
+        $_SESSION['valid']["time"] = explode(" ", $_POST["date"])[0];
       }
 
       if (empty($_SESSION['errors'])) {
@@ -24,7 +25,7 @@ function validateForm() {
         foreach ($_SESSION['valid'] as $event_key => $value) {
           $event_details[$event_key] = $value;
         }
-        $event_details["source"] = "custom";
+        $event_details["source"] = "standard";
         $collection->insertOne($event_details);
       }
       else {
