@@ -2,7 +2,7 @@
 require_once __DIR__ . "/vendor/autoload.php";
 $people = (new MongoDB\Client)->hacker_tracker->people;
 $cursor = $people->find();
-$i = 0
+$i = 0;
 foreach ($cursor as $person) {
   # code...
   $i+=1;
