@@ -8,13 +8,13 @@ foreach ($cursor as $person) {
   $i+=1;
   switch ($i) {
     case 3:
-      echo $person["github"] . ", and ";
+      echo '<a href="http://github.com/' . $person["github"] . '">'. $person["github"] . '</a>, and ';
       break;
     case 4:
-      echo $person["github"] . " present...";
+      echo '<a href="http://github.com/' $person["github"] . '">'. $person["github"] . '</a> present...';
       break;
     default:
-      echo $person["github"] . ", ";
+      echo '<a href="http://github.com/' $person["github"] . '">'. $person["github"] . '</a>, ';
       break;
   }
 }
