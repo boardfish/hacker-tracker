@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', '0');
+ini_set('display_errors', '1');
 require_once __DIR__ . "/vendor/autoload.php";
 require_once "results.php";
 session_start();
@@ -146,13 +146,12 @@ session_start();
           Feed in the details of the event here.
         </p>
         <form method="post">
-          <input type="hidden" name="post_key" value="events">
+          <input type="hidden" name="post_key" value="overall_event">
         <table border="1">
           <tr>
             <td>Event Name</td>
-            <td colspan="3"><input type="text" value="" size="70"></td>
+            <td colspan="3"><input type="text" name="event_name" value="" size="70"></td>
           </tr>
-          <!--Firefox doesn't support datetime types, need a solution!!-->
           <tr>
             <td>Hacking Start Time</td>
             <td><input class="datetimepicker" type="text" name="startdate"></td>
@@ -232,23 +231,24 @@ session_start();
         <p>
           Don't let the greatest moments of your hackathon fall under a surge of sleepiness or (Torvalds forbid) an avalanche of alcohol. List any major milestones your group hit here!
         </p>
-        <select id="eventType" name="eventType">
-          <option value="annoyance">Annoyance Discovered</option>
-          <option value="teamName" selected="selected">Team Name Chosen</option>
-          <option value="sleep">Team Member Sleeps</option>
-          <option value="wake">Team Member Awakens</option>
-          <option value="alpha">Working Alpha Created</option>
-          <option value="werewolf">Werewolf Played</option>
-        </select>
-        <form id="eventContent" class="forms" action="" method="post">
-            <input id="annoyance" name="annoyanceContent" type="text" placeholder="What bug did you find?" size="60"/>
-            <input id="teamName" name="teamNameContent" type="text" placeholder="What have you crowned your team?" size="60"/>
-            <input id="sleep" name="sleepContent" type="text" placeholder="Who's sleeping?" size="60"/>
-            <input id="wake" name="wakeContent" type="text" placeholder="Who has awakened?" size="60"/>
-            <input id="alpha" name="alphaContent" type="text" placeholder="What's the commit ID of your alpha?" size="60"/>
-            <input id="werewolf" name="werewolfContent" type="text" placeholder="Who's playing Werewolf?" size="60"/>
-            <input id="date" name="date" type="text" style="display:none;"> <!--might not work?...-->
-            <input type="submit" value="Submit">
+        <form id="eventContent" class="forms" method="post">
+          <select id="eventType" name="eventType">
+            <option value="annoyance">Annoyance Discovered</option>
+            <option value="teamName" selected="selected">Team Name Chosen</option>
+            <option value="sleep">Team Member Sleeps</option>
+            <option value="wake">Team Member Awakens</option>
+            <option value="alpha">Working Alpha Created</option>
+            <option value="werewolf">Werewolf Played</option>
+          </select>
+          <input type="hidden" name="post_key" value="events">
+          <input id="annoyance" name="annoyanceContent" type="text" placeholder="What bug did you find?" size="60"/>
+          <input id="teamName" name="teamNameContent" type="text" placeholder="What have you crowned your team?" size="60"/>
+          <input id="sleep" name="sleepContent" type="text" placeholder="Who's sleeping?" size="60"/>
+          <input id="wake" name="wakeContent" type="text" placeholder="Who has awakened?" size="60"/>
+          <input id="alpha" name="alphaContent" type="text" placeholder="What's the commit ID of your alpha?" size="60"/>
+          <input id="werewolf" name="werewolfContent" type="text" placeholder="Who's playing Werewolf?" size="60"/>
+          <input id="date" name="date" type="text" style="display:none;"> <!--might not work?...-->
+          <input type="submit" value="Submit">
         </form>
       </div>
     </main>
