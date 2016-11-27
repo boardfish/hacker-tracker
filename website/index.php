@@ -145,7 +145,8 @@ session_start();
         <p>
           Feed in the details of the event here.
         </p>
-        <form method="post" action="">
+        <form method="post">
+          <input type="hidden" name="post_key" value="events">
         <table border="1">
           <tr>
             <td>Event Name</td>
@@ -190,6 +191,7 @@ session_start();
         endif;
         ?>
         <form method="post">
+        <input type="hidden" name="post_key" value="people">
         <table border="1">
           <tr>
             <td> </td>

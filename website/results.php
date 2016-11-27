@@ -4,6 +4,7 @@ function validateForm() {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //clear errors and valid entries from previous call first
     clearSessionData();
+    
     foreach($_POST as $name => $value) {
       $value = htmlspecialchars(strip_tags($value));
       if (!preg_match('/[\w]+/', $value)) {
