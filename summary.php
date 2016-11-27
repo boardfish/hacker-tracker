@@ -34,7 +34,7 @@
       <div class="row">
         <div class="col-sm-4">
           <?php include "githubProfiles.php" ?>
-          <?php echo '<h1><a href="http://github.com/' . $hack_event['repo_name'] . '">$hack_event["repo_name"]' . "</a></h1>" ?>
+          <?php echo '<h1><a href="http://github.com/' . $hack_event['repo_name'] . '">' . $hack_event["repo_name"] . "</a></h1>" ?>
         </div>
           <!--PHP insert github repository link here-->
 
