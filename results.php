@@ -25,14 +25,11 @@ function validateForm() {
           $event_details[$event_key] = $value;
         }
         $event_details["source"] = "custom";
-        var_dump($_SESSION['errors']);
-        var_dump($event_details);
         $collection->insertOne($event_details);
       }
     }
     // A request has been sent for adding people in the hackathon team
     else if ($_POST['post_key'] == "people") {
-      echo "11111111";
       foreach($_POST as $name => $value) {
         $value = htmlspecialchars(strip_tags($value));
         if (!preg_match('/[\w]+/', $value)) {
