@@ -9,32 +9,42 @@ session_start();
   <head>
     <meta charset="utf-8">
     <title>Hacker Tracker</title>
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui-timepicker-addon.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <header>
+    <!-- <header>
       <h1>Hacker Tracker</h1>
       <h2>Complete documentation for your hackathon!</h2>
-    </header>
-    <nav>
-      <ul>
-        <li><a href="#" id="TheEvent">The Event</a></li>
-        <li><a href="#" id="YourTeam">Your Team</a></li>
-        <li><a href="#" id="Milestones">Milestones</a></li>
-      </ul>
+    </header> -->
+    <nav class="fixed-nav-bar">
+    <div class="nav">
+      <div class="container">
+        <ul>
+          <li><a href="#" id="TheEvent">The Event</a></li>
+          <li><a href="#" id="YourTeam">Your Team</a></li>
+          <li><a href="#" id="Milestones">Milestones</a></li>
+        </ul>
+      </div>
+    </div>
     </nav>
     <main>
       <?php validateForm(); ?>
-      <div id="InitialContent">
-        <h1>Welcome.</h1>
+      <div class="InitialContent">
+        <h1>Welcome to</h1>
+        <div class="Logo">
+        <img src="hackertracker.png" border="0" alt="postimage" width="650" height="100">
+        </div>
         <p>
-          Welcome to another great MLH hackathon! There are new people to meet, new places to go, and most of all, new levels of tiredness to reach (of course). But we won't let this go forgotten! Use <strong>Hacker Tracker</strong> to document your hackathon, from those awkward planning stages to another intense game of Werewolf, and maybe to the time you'll get your hands on an award.
+          Welcome to another great MLH hackathon! There are new people to meet, new places to go, <br>and most of all, new levels of tiredness to reach (of course).</br>
+        </p>
+          
+        <p>But we won't let this go forgotten! Use <strong>Hacker Tracker</strong> to document your hackathon, from those awkward planning <br>stages to another intense game of Werewolf,</br> and maybe to the time you'll get your hands on an award.
         </p>
       </div>
       <div id="eventProfile" class="hackathonSection">
-        <!--Most of this to be deprecated?
-        Intending to scrape MLH pages for this, but it could be tough.-->
         <h1>The Event</h1>
         <p>
           Feed in the details of the event here.
@@ -55,7 +65,7 @@ session_start();
         </ul>
         <form method="post">
           <input type="hidden" name="post_key" value="overall_event">
-        <table border="1">
+        <table align="center" border="1">
           <tr>
             <td>Event Name</td>
             <td colspan="3"><input type="text" name="event_name" value="" size="70"></td>
@@ -73,7 +83,7 @@ session_start();
             <td><input type="number" name="end_min" min="0" max="59" value=""></td>
           </tr>
         </table>
-        <p><input type="submit" value="Submit"></p>
+        <p><input class="btn orange" type="submit" value="Submit"></p>
         </form>
       </div>
       <div id="GitHubProfiles" class="hackathonSection">
@@ -101,7 +111,7 @@ session_start();
         ?>
         <form method="post">
         <input type="hidden" name="post_key" value="people">
-        <table border="1">
+        <table border="1" align="center">
           <tr>
             <td> </td>
             <td>Your name</td>
@@ -133,7 +143,7 @@ session_start();
             <td><input type="text" name="teammate4twitter" value=""><br></td>
           </tr>
         </table>
-        <p><input type="submit" value="Submit"></p>
+        <p><input class="btn orange" type="submit" value="Submit"></p>
         </form>
       </div>
       <div id="event" class="hackathonSection">
@@ -172,7 +182,7 @@ session_start();
           <input id="alpha" name="alphaContent" type="text" placeholder="What's the commit ID of your alpha?" size="60"/>
           <input id="werewolf" name="werewolfContent" type="text" placeholder="Who's playing Werewolf?" size="60"/>
           <input id="date" name="date" type="text" style="display:none;"> <!--might not work?...-->
-          <input type="submit" value="Submit">
+          <input class="btn orange" type="submit" value="Submit">
         </form>
       </div>
     </main>
