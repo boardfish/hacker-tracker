@@ -1,6 +1,6 @@
 $(document).ready(function() {
   console.log( "ready!" );
-  $( "main div.hackathonSection .datetimepicker" ).datepicker();
+  $( "main div.hackathonSection .datetimepicker" ).datepicker({dateFormat: "dd-mm-yy"});
   $('main #event').hide();
   $select = $('#eventType');
   $('#annoyance').hide();

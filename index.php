@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', '0');
+error_reporting(E_ERROR);
 require_once __DIR__ . "/vendor/autoload.php";
 require_once "results.php";
 session_start();
@@ -39,6 +39,20 @@ session_start();
         <p>
           Feed in the details of the event here.
         </p>
+        <?php
+        if ($_SESSION['errors']['post_key'] == "overall_event"):
+        ?>
+        <h3>The following fields contain invalid values:</h3>
+        <ul>
+        <?php
+        foreach ($_SESSION['errors'] as $event_type => $value) {
+          if ($event_type == "post_key") continue;
+          list($event_marker, $time_boundary) = explode("_", $event_type);
+          echo "<li>$event_marker $time_boundary</li>";
+        }
+        endif;
+        ?>
+        </ul>
         <form method="post">
           <input type="hidden" name="post_key" value="overall_event">
         <table border="1">
@@ -48,15 +62,15 @@ session_start();
           </tr>
           <tr>
             <td>Hacking Start Time</td>
-            <td><input class="datetimepicker" type="text" name="startdate"></td>
-            <td><input type="number" name="starthour" min="0" max="23" value=""></td>
-            <td><input type="number" name="startmin" min="0" max="59" value=""></td>
+            <td><input class="datetimepicker" type="text" name="start_date"></td>
+            <td><input type="number" name="start_hour" min="0" max="23" value=""></td>
+            <td><input type="number" name="start_min" min="0" max="59" value=""></td>
           </tr>
           <tr>
             <td>Hacking End Time</td>
-            <td><input class="datetimepicker" type="text" name="enddate"></td>
-            <td><input type="number" name="endhour" min="0" max="23" value=""></td>
-            <td><input type="number" name="endmin" min="0" max="59" value=""></td>
+            <td><input class="datetimepicker" type="text" name="end_date"></td>
+            <td><input type="number" name="end_hour" min="0" max="23" value=""></td>
+            <td><input type="number" name="end_min" min="0" max="59" value=""></td>
           </tr>
         </table>
         <p><input type="submit" value="Submit"></p>
@@ -69,14 +83,15 @@ session_start();
         </p>
         <form class="forms" method="post" action="">
         <?php
-        if ($_SESSION['errors']):
+        if ($_SESSION['errors']['post_key'] == "people"):
         ?>
         <h3>The following fields contain invalid values:</h3>
         <ul>
         <?php
           foreach($_SESSION['errors'] as $name => $value) {
+            if ($name == "post_key") continue;
             $field_info = getFieldInfoFromName($name);
-            $msg = "Team Member {$field_info[1]}'s " . $field_info[2] . (($field_info[2] == "name")? "" : "name");
+            $msg = "Team Member {$field_info[1]}'s " . $field_info[2] . (($field_info[2] == "name")? "" : " name");
             echo "<li>$msg</li>";
           }
         ?>
@@ -126,6 +141,20 @@ session_start();
         <p>
           Don't let the greatest moments of your hackathon fall under a surge of sleepiness or (Torvalds forbid) an avalanche of alcohol. List any major milestones your group hit here!
         </p>
+        <?php
+        if ($_SESSION['errors']['post_key'] == "events"):
+        ?>
+        <h3>The following fields contain invalid values:</h3>
+        <ul>
+        <?php
+        foreach ($_SESSION['errors'] as $event_type => $value):
+          if ($event_type == "post_key") continue;
+          $event_type = str_replace("Content", "", $event_type);
+          echo "<li>" . $event_type . " event</li>";
+        endforeach;
+        endif;
+        ?>
+        </ul>
         <form id="eventContent" class="forms" method="post">
           <select id="eventType" name="eventType">
             <option value="annoyance">Annoyance Discovered</option>

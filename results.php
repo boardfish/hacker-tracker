@@ -27,6 +27,9 @@ function validateForm() {
         $event_details["source"] = "custom";
         $collection->insertOne($event_details);
       }
+      else {
+        $_SESSION['errors']['post_key'] = "events";
+      }
     }
     // A request has been sent for adding people in the hackathon team
     else if ($_POST['post_key'] == "people") {
@@ -58,6 +61,9 @@ function validateForm() {
         $insertOneResult = $collection->insertOne($user_details_arr);
         }
       }
+      else {
+        $_SESSION['errors']['post_key'] = "people";
+      }
     }
     // Request sent for adding an associated overall hackathon event
     else if ($_POST['post_key'] == "overall_event") {
@@ -81,6 +87,9 @@ function validateForm() {
           $event_details[$event_key] = $value;
         }
         $collection->insertOne($event_details);
+      }
+      else {
+        $_SESSION['errors']['post_key'] = "overall_event";
       }
     }
     else {
