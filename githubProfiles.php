@@ -11,10 +11,10 @@ foreach ($cursor as $person) {
       echo '<a href="http://github.com/' . $person["github"] . '">'. $person["github"] . '</a>, and ';
       break;
     case 4:
-      echo '<a href="http://github.com/' $person["github"] . '">'. $person["github"] . '</a> present...';
+      echo '<a href="http://github.com/' . $person["github"] . '">'. $person["github"] . '</a> present...';
       break;
     default:
-      echo '<a href="http://github.com/' $person["github"] . '">'. $person["github"] . '</a>, ';
+      echo '<a href="http://github.com/' . $person["github"] . '">'. $person["github"] . '</a>, ';
       break;
   }
 }
