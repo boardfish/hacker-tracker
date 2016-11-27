@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,9 +14,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
+    <?php
+    //event query
+    $db = (new MongoDB\Client)->hacker_tracker;
+    $hack_event = $db->overall_event->findOne([], [
+      'projection' => ["_id" => 0]
+    ]);
+    ?>
     <div class="container">
       <div class="jumbotron">
-        <h1>Hackathon Name<br><small>18/18/2018-19/18/2018</small></h1>
+        <h1><?=$hack_event['event_name']?><br><small><?= "{$hack_event['start_date']} - {$hack_event['end_date']}"?></small></h1>
       </div>
       <div class="well">
         <p>
@@ -31,61 +39,78 @@
           <!--PHP insert github repository link here-->
 
         <div class="col-sm-8">
-          <table class="table table-hover table-responsive">
-            <tr>
-              <th>
-                Time
-              </th>
-              <th>
-                Source
-              </th>
-              <th>
-                Content
-              </th>
-            </tr>
-            <!--include php here-->
+      <table class="table table-hover table-responsive">
+        <tr>
+          <th>
+            Time
+          </th>
+          <th>
+            Source
+          </th>
+          <th>
+            Content
+          </th>
+        </tr>
+        <?php
+        $user_events = $db->events->find();
+        foreach ($user_events as $event):
+          switch($event["source"]):
+            case "standard": ?>
+              <tr>
+                <td><?= $event["time"] ?></td>
+                <td>
+                  <span class="glyphicon glyphicon-dashboard"></span>
+                  <?= $event["event_type"] ?>
+                </td>
+                <td><?= $event["event_value"] ?></td>
+              </tr>
             <?php
-            include(summaryTableCreator.php);
-            ?>
-            <!--
-            <tr>
-              <td>
-                18:59
-              </td>
-              <td>
-                <span class="glyphicon glyphicon-user"></span>@hacknotts
-              </td>
-              <td>
-                I'm tired
-              </td>
-            </tr>
-            <tr>
-              <td>
-                23:47
-              </td>
-              <td>
-                <span class="glyphicon glyphicon-cloud-download"></span> ae27eh
-              </td>
-              <td>
-                Commit message
-              </td>
-            </tr>
-            <tr>
-              <td>
-                23:47
-              </td>
-              <td>
-                <span class="glyphicon glyphicon-dashboard"></span>Fell asleep
-              </td>
-              <td>
-                Darren fell asleep. I drew a moustache on him before realising he already had one.
-              </td>
-            </tr>
-            -->
-          </table>
-        </div>
-      </div>
-
+              break;
+            case "twitter":
+              break;
+            case "github":
+              break;
+          endswitch;
+        ?>
+        <?php
+        endforeach;
+        ?>
+        <!--
+        <tr>
+          <td>
+            18:59
+          </td>
+          <td>
+            <span class="glyphicon glyphicon-user"></span>@hacknotts
+          </td>
+          <td>
+            I'm tired
+          </td>
+        </tr>
+        <tr>
+          <td>
+            23:47
+          </td>
+          <td>
+            <span class="glyphicon glyphicon-cloud-download"></span> ae27eh
+          </td>
+          <td>
+            Commit message
+          </td>
+        </tr>
+        <tr>
+          <td>
+            23:47
+          </td>
+          <td>
+            <span class="glyphicon glyphicon-dashboard"></span>Fell asleep
+          </td>
+          <td>
+            Darren fell asleep. I drew a moustache on him before realising he already had one.
+          </td>
+        </tr>
+        -->
+      </table>
     </div>
   </body>
 </html>
