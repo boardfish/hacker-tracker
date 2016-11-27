@@ -9,7 +9,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <title>Hacker Tracker</title>
-    <link rel="stylesheet" href="jquery-ui.min.css">
+    <link rel="stylesheet" href="/jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="/jquery-ui/jquery-ui-timepicker-addon.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="jquery-ui/jquery-ui.min.js"></script>
