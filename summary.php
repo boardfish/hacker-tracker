@@ -53,63 +53,39 @@
         </tr>
         <?php
         $user_events = $db->events->find();
-        foreach ($user_events as $event):
+        foreach ($user_events as $event): ?>
+          <tr>
+            <td><?= $event['time'] ?></td>
+          <?php
           switch($event["source"]):
             case "standard": ?>
-              <tr>
-                <td><?= $event["time"] ?></td>
-                <td>
-                  <span class="glyphicon glyphicon-dashboard"></span>
-                  <?= $event["event_type"] ?>
-                </td>
-                <td><?= $event["event_value"] ?></td>
-              </tr>
+              <td>
+                <span class="glyphicon glyphicon-dashboard"></span>
+                <?= $event["event_type"] ?>
+              </td>
             <?php
               break;
-            case "twitter":
+            case "twitter": ?>
+              <td>
+                <span class="glyphicon glyphicon-user"></span>
+                <?= $event["event_type"] ?>
+              </td>
+            <?php
               break;
-            case "github":
+            case "github": ?>
+              <td>
+                <span class="glyphicon glyphicon-cloud-download"></span>
+                <?= $event["event_type"] ?>
+              </td>
+            <?php
               break;
           endswitch;
         ?>
+          <td><?= $event["event_value"] ?></td>
+        </tr>
         <?php
         endforeach;
         ?>
-        <!--
-        <tr>
-          <td>
-            18:59
-          </td>
-          <td>
-            <span class="glyphicon glyphicon-user"></span>@hacknotts
-          </td>
-          <td>
-            I'm tired
-          </td>
-        </tr>
-        <tr>
-          <td>
-            23:47
-          </td>
-          <td>
-            <span class="glyphicon glyphicon-cloud-download"></span> ae27eh
-          </td>
-          <td>
-            Commit message
-          </td>
-        </tr>
-        <tr>
-          <td>
-            23:47
-          </td>
-          <td>
-            <span class="glyphicon glyphicon-dashboard"></span>Fell asleep
-          </td>
-          <td>
-            Darren fell asleep. I drew a moustache on him before realising he already had one.
-          </td>
-        </tr>
-        -->
       </table>
     </div>
   </body>
